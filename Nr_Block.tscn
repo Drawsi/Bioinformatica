@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Nr_Block" type="Label"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_scale = Vector2( 4, 4 )
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.835294, 0.588235, 0.266667, 1 )
