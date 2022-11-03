@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Smith.gd" type="Script" id=1]
+[ext_resource path="res://IBM.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Needleman.gd" type="Script" id=3]
 
 [node name="Main" type="Node2D"]
-script = ExtResource( 1 )
 
 [node name="BG" type="ColorRect" parent="."]
 margin_right = 1024.0
@@ -16,6 +17,9 @@ __meta__ = {
 [node name="SidePanel" type="Control" parent="."]
 margin_right = 256.0
 margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="SidePanel"]
 anchor_right = 1.0
@@ -29,6 +33,9 @@ margin_right = 192.0
 margin_bottom = 88.0
 text = "CGTA"
 placeholder_text = "Prima secventa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Seq2" type="LineEdit" parent="SidePanel"]
 margin_left = 16.0
@@ -90,80 +97,111 @@ margin_right = 119.0
 margin_bottom = 492.0
 rect_scale = Vector2( 2, 2 )
 text = "Calculeaza"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Content" type="HSplitContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 256.0
 margin_right = 1024.0
 margin_bottom = 600.0
-split_offset = 400
+custom_fonts/font = ExtResource( 2 )
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Matrix_Table" type="Control" parent="Content"]
-margin_right = 400.0
-margin_bottom = 600.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Content/Matrix_Table"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 208.0
-margin_bottom = 208.0
-
-[node name="GridContainer" type="GridContainer" parent="Content/Matrix_Table/CenterContainer"]
-margin_left = 96.0
-margin_top = 96.0
-margin_right = 96.0
-margin_bottom = 96.0
-custom_constants/vseparation = 25
-custom_constants/hseparation = 25
-
-[node name="Others" type="Control" parent="Content"]
-margin_left = 412.0
-margin_right = 768.0
-margin_bottom = 600.0
-
-[node name="BG_Right" type="ColorRect" parent="Content/Others"]
+[node name="Needleman" type="Tabs" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.592157, 0.52549, 0.619608, 1 )
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 3 )
 
-[node name="DL" type="Label" parent="Content/Others"]
-margin_left = 36.0
-margin_top = 32.0
-margin_right = 76.0
-margin_bottom = 46.0
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Needleman"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DL" type="Label" parent="TabContainer/Needleman"]
+margin_left = 444.0
+margin_top = 64.0
+margin_right = 484.0
+margin_bottom = 78.0
 rect_scale = Vector2( 2, 2 )
 text = "DL="
 
-[node name="DH" type="Label" parent="Content/Others"]
-margin_left = 36.0
-margin_top = 80.0
-margin_right = 76.0
-margin_bottom = 94.0
+[node name="DH" type="Label" parent="TabContainer/Needleman"]
+margin_left = 444.0
+margin_top = 112.0
+margin_right = 484.0
+margin_bottom = 126.0
 rect_scale = Vector2( 2, 2 )
 text = "DH="
 
-[node name="C2" type="ColorRect" parent="Content/Others"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -68.0
-margin_top = -44.0
-margin_right = 68.0
-margin_bottom = 44.0
-color = Color( 0.886275, 0.698039, 0.682353, 1 )
+[node name="Label" type="Label" parent="TabContainer/Needleman"]
+margin_top = -8.0
+margin_right = 444.0
+margin_bottom = 408.0
+text = "asdasdas"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Txt1" type="Label" parent="Content/Others/C2"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 48.0
-margin_bottom = 22.0
+[node name="Smith" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 1 )
+
+[node name="GridContainer2" type="GridContainer" parent="TabContainer/Smith"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DL2" type="Label" parent="TabContainer/Smith"]
+margin_left = 444.0
+margin_top = 64.0
+margin_right = 484.0
+margin_bottom = 78.0
 rect_scale = Vector2( 2, 2 )
+text = "DL="
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Txt2" type="Label" parent="Content/Others/C2"]
-margin_left = 8.0
-margin_top = 48.0
-margin_right = 48.0
-margin_bottom = 62.0
+[node name="DH2" type="Label" parent="TabContainer/Smith"]
+margin_left = 444.0
+margin_top = 112.0
+margin_right = 484.0
+margin_bottom = 126.0
 rect_scale = Vector2( 2, 2 )
+text = "DH="
 
-[connection signal="pressed" from="SidePanel/Calc" to="." method="_on_Calc_pressed"]
+[node name="Beteringhe" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Needleman" method="_on_Calc_pressed"]
+[connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Smith" method="_on_Calc_pressed"]
