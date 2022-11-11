@@ -1,14 +1,17 @@
 extends Tabs
 
-onready var s1 = get_node("../../SidePanel/Seq1")
-onready var s2 = get_node("../../SidePanel/Seq2")
+onready var s1 = get_node("../../SidePanel/S1")
+onready var s2 = get_node("../../SidePanel/S2")
 onready var pot = get_node("../../SidePanel/P")
 onready var nepot = get_node("../../SidePanel/N")
 onready var gap = get_node("../../SidePanel/G")
 onready var grid = get_node("GridContainer")
-onready var label = get_node("Label")
+onready var show = get_node("Show")
 var block = load("res://Nr_Block.tscn")
 var matrix = []
+var seq1 = ""
+var seq2 = ""
+var seq_max
 
 var s1_txt
 var s2_txt
@@ -17,6 +20,8 @@ var width = 0
 var p 
 var n
 var g
+
+var performance = false
 
 func Needleman_Wunsch():
 	#						Needleman–Wunsch method
@@ -45,7 +50,8 @@ func Needleman_Wunsch():
 	var maxi
 	for x in height+2:
 		for y in width+2:
-			if x>1 and y>1:#Getting into the main part
+			if x>1 and y>1:
+	#						Getting into the main part
 	#						Diagonal line
 				if x==y:
 					matrix[x][y]=matrix[x-1][y-1] + png_test(x,y)
@@ -53,19 +59,29 @@ func Needleman_Wunsch():
 				else:
 					maxi=[matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1]].max()
 					matrix[x][y]=maxi + png_test(x,y)
-	for x in height+2:
-		print('\n')
-		for y in width+2:
-			print(str((matrix[x][y])))
 
 func show_matrix():
-	for x in height+2:
-		for y in width+2:
-	#						Making the borders
-			var b = block.instance()
-			grid.columns = width+2
-			grid.add_child(b)
-			b.set_text(str(matrix[x][y]))
+	if performance:
+		show.visible = true
+		grid.visible = false
+		var all = ''
+		for x in height+2:
+			all = all + "\n"
+			for y in width+2:
+				all = all + str((matrix[x][y]))
+		show.text=all
+	else:
+		show.visible = false
+		grid.visible = true
+		for x in height+2:
+			for y in width+2:
+		#						Making the borders
+				var b = block.instance()
+				grid.columns = width+2
+				grid.add_child(b)
+				b.set_text(str(matrix[x][y]))
+	$Seq1.text = seq1
+	$Seq2.text = seq2
 
 func dl_dh():
 	#						Shows the 'score' of the matrix
@@ -94,6 +110,23 @@ func png_test(x,y):
 	else:
 		return g
 
+func backtrack(x,y):
+	if seq_max>0:
+		var highest = [matrix[x-1][y], matrix[x][y-1], matrix[x-1][y-1]].max()
+		if highest == matrix[x-1][y-1]:
+			seq1 = str(matrix[0][y-1]) + seq1
+			seq2 = str(matrix[x-1][0]) + seq2
+			backtrack(x-1,y-1)
+		elif highest == matrix[x-1][y]:
+			seq1 = " " + seq1
+			seq2 = str(matrix[x-1][0]) + seq2
+			backtrack(x-1,y)
+		elif highest == matrix[x][y-1]:
+			seq1 = str(matrix[0][y-1]) + seq1
+			seq2 = " " + seq2
+			backtrack(x,y-1)
+		seq_max -= 1
+
 func _on_Calc_pressed():
 	#						Initialising the basic vars
 	p = int(pot.get_text())
@@ -104,12 +137,22 @@ func _on_Calc_pressed():
 	if s1_txt and s2_txt:
 		width = s1_txt.length()
 		height = s2_txt.length()
+		seq_max = [height, width].max()
 	#						Erases any previous values
 	for c in grid.get_children():
 		grid.remove_child(c)
 		c.queue_free()
 	matrix = []
+	seq1 = ""
+	seq2 = ""
 	#						Starts processes
 	Needleman_Wunsch()
-#	show_matrix()
+	seq1 = str(matrix[height+1][0])
+	seq2 = str(matrix[0][width+1])
+	backtrack(height+1,width+1)
 	dl_dh()
+	show_matrix()
+
+func _on_CheckButton_pressed():
+	performance = !performance
+

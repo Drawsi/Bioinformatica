@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Smith.gd" type="Script" id=1]
 [ext_resource path="res://IBM.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Needleman.gd" type="Script" id=3]
+[ext_resource path="res://Beteringhe.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="Main" type="Node2D"]
 
@@ -26,7 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.286275, 0.333333, 0.45098, 1 )
 
-[node name="Seq1" type="LineEdit" parent="SidePanel"]
+[node name="S1" type="LineEdit" parent="SidePanel"]
 margin_left = 16.0
 margin_top = 64.0
 margin_right = 192.0
@@ -37,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Seq2" type="LineEdit" parent="SidePanel"]
+[node name="S2" type="LineEdit" parent="SidePanel"]
 margin_left = 16.0
 margin_top = 128.0
 margin_right = 192.0
@@ -97,9 +100,15 @@ margin_right = 119.0
 margin_bottom = 492.0
 rect_scale = Vector2( 2, 2 )
 text = "Calculeaza"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="CheckButton" type="CheckButton" parent="SidePanel"]
+margin_left = 24.0
+margin_top = 408.0
+margin_right = 207.0
+margin_bottom = 448.0
+custom_styles/focus = SubResource( 1 )
+text = "Mod performant"
+align = 1
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_right = 1.0
@@ -109,20 +118,43 @@ margin_right = 1024.0
 margin_bottom = 600.0
 custom_fonts/font = ExtResource( 2 )
 tab_align = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Needleman" type="Tabs" parent="TabContainer"]
+[node name="Beteringhe" type="Tabs" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Needleman"]
+[node name="DL" type="Label" parent="TabContainer/Beteringhe"]
+margin_left = 444.0
+margin_top = 64.0
+margin_right = 484.0
+margin_bottom = 78.0
+rect_scale = Vector2( 2, 2 )
+text = "DL="
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DH" type="Label" parent="TabContainer/Beteringhe"]
+margin_left = 444.0
+margin_top = 112.0
+margin_right = 484.0
+margin_bottom = 126.0
+rect_scale = Vector2( 2, 2 )
+text = "DH="
+
+[node name="Show" type="Label" parent="TabContainer/Beteringhe"]
+margin_left = 4.0
+margin_top = -8.0
+margin_right = 448.0
+margin_bottom = 408.0
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Beteringhe"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/vseparation = 20
@@ -131,6 +163,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Seq1" type="Label" parent="TabContainer/Beteringhe"]
+margin_left = 444.0
+margin_top = 152.0
+margin_right = 484.0
+margin_bottom = 174.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Seq2" type="Label" parent="TabContainer/Beteringhe"]
+margin_left = 444.0
+margin_top = 200.0
+margin_right = 484.0
+margin_bottom = 222.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+
+[node name="Needleman" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 3 )
+
 [node name="DL" type="Label" parent="TabContainer/Needleman"]
 margin_left = 444.0
 margin_top = 64.0
@@ -138,6 +199,9 @@ margin_right = 484.0
 margin_bottom = 78.0
 rect_scale = Vector2( 2, 2 )
 text = "DL="
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DH" type="Label" parent="TabContainer/Needleman"]
 margin_left = 444.0
@@ -147,14 +211,38 @@ margin_bottom = 126.0
 rect_scale = Vector2( 2, 2 )
 text = "DH="
 
-[node name="Label" type="Label" parent="TabContainer/Needleman"]
+[node name="Show" type="Label" parent="TabContainer/Needleman"]
+margin_left = 4.0
 margin_top = -8.0
-margin_right = 444.0
+margin_right = 448.0
 margin_bottom = 408.0
-text = "asdasdas"
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Needleman"]
+margin_left = 4.0
+margin_right = 316.0
+margin_bottom = 304.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+
+[node name="Seq1" type="Label" parent="TabContainer/Needleman"]
+margin_left = 444.0
+margin_top = 152.0
+margin_right = 484.0
+margin_bottom = 166.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Seq2" type="Label" parent="TabContainer/Needleman"]
+margin_left = 444.0
+margin_top = 200.0
+margin_right = 484.0
+margin_bottom = 222.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
 
 [node name="Smith" type="Tabs" parent="TabContainer"]
 visible = false
@@ -166,16 +254,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 script = ExtResource( 1 )
 
-[node name="GridContainer2" type="GridContainer" parent="TabContainer/Smith"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/vseparation = 20
-custom_constants/hseparation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DL2" type="Label" parent="TabContainer/Smith"]
+[node name="DL" type="Label" parent="TabContainer/Smith"]
 margin_left = 444.0
 margin_top = 64.0
 margin_right = 484.0
@@ -186,7 +265,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DH2" type="Label" parent="TabContainer/Smith"]
+[node name="DH" type="Label" parent="TabContainer/Smith"]
 margin_left = 444.0
 margin_top = 112.0
 margin_right = 484.0
@@ -194,14 +273,44 @@ margin_bottom = 126.0
 rect_scale = Vector2( 2, 2 )
 text = "DH="
 
-[node name="Beteringhe" type="Tabs" parent="TabContainer"]
-visible = false
+[node name="Show" type="Label" parent="TabContainer/Smith"]
+margin_left = 4.0
+margin_top = -8.0
+margin_right = 448.0
+margin_bottom = 408.0
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Smith"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Seq1" type="Label" parent="TabContainer/Smith"]
+margin_left = 444.0
+margin_top = 152.0
+margin_right = 484.0
+margin_bottom = 174.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Seq2" type="Label" parent="TabContainer/Smith"]
+margin_left = 444.0
+margin_top = 200.0
+margin_right = 484.0
+margin_bottom = 222.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 2 )
 
 [connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Needleman" method="_on_Calc_pressed"]
 [connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Smith" method="_on_Calc_pressed"]
+[connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Beteringhe" method="_on_Calc_pressed"]
+[connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Needleman" method="_on_CheckButton_pressed"]
+[connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Smith" method="_on_CheckButton_pressed"]
+[connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Beteringhe" method="_on_CheckButton_pressed"]

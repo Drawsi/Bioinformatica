@@ -23,32 +23,30 @@ var g
 
 var performance = false
 
-func Smith_Waterman():
-	#						Smith_Waterman method
+func Adrian_Beteringhe():
+	#						Adrian_Beteringhe method
 	
 	#						Making the blank matrix
-	for x in height+2:
+	for x in height+3:
 		matrix.append([])
 		for y in width+2:
 			matrix[x].append('')# will be set to null after testing
 		
 	#						Giving it starter values
 	matrix[1][1] = 0
-	matrix[1][2] = 0
-	matrix[2][1] = 0
+	matrix[1][2] = g
+	matrix[2][1] = g
 	#						Making the first collumn and line
 	for x in height+2:
 		if x>1:
-			matrix[x][1] = 0
+			matrix[x][1] = matrix[x-1][1] + g
 			matrix[x][0] = s2_txt[x-2]
 	for y in width+2:
 		if y>1:
-			matrix[1][y] = 0
+			matrix[1][y] = matrix[1][y-1] + g
 			matrix[0][y] = s1_txt[y-2]
 			
 	#						Calculating the matrix
-	var i = 1
-	var j = 1
 	var maxi
 	for x in height+2:
 		for y in width+2:
@@ -61,25 +59,21 @@ func Smith_Waterman():
 				else:
 					maxi=[matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1]].max()
 					matrix[x][y]=maxi + png_test(x,y)
-					
-				if matrix[x][y]<0:
-					matrix[x][y]=0
-	for x in height+2:
-		for y in width+2:
-			if x>1 and y>1:
-				if int(matrix[x][y])>int(matrix[i][j]):
-					i = x
-					j = y
-	seq1 = str(matrix[i][0])
-	seq2 = str(matrix[0][j])
-	backtrack(i,j)
+				
+				if x<height+2:
+					maxi=[matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1],-int(matrix[x+1][y-1])].max()
+	
+	matrix[height+2][0] = " "
+	for y in width+2:
+		if y>0:
+			matrix[height+2][y] = matrix[1][width+2-y]
 
 func show_matrix():
 	if performance:
 		show.visible = true
 		grid.visible = false
 		var all = ''
-		for x in height+2:
+		for x in height+3:
 			all = all + "\n"
 			for y in width+2:
 				all = all + str((matrix[x][y]))
@@ -87,7 +81,7 @@ func show_matrix():
 	else:
 		show.visible = false
 		grid.visible = true
-		for x in height+2:
+		for x in height+3:
 			for y in width+2:
 		#						Making the borders
 				var b = block.instance()
@@ -160,7 +154,10 @@ func _on_Calc_pressed():
 	seq1 = ""
 	seq2 = ""
 	#						Starts processes
-	Smith_Waterman()
+	Adrian_Beteringhe()
+	seq1 = str(matrix[height+1][0])
+	seq2 = str(matrix[0][width+1])
+	backtrack(height+1,width+1)
 	dl_dh()
 	show_matrix()
 
