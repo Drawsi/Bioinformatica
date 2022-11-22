@@ -1,5 +1,12 @@
-=====
-Titlu
-=====
+================
+Document Heading
+================
 
-I do not know what this is supposed to be
+Heading
+=======
+
+Sub-heading
+-----------
+
+Paragraphs are separated
+by a blank line.
