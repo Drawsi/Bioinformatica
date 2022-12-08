@@ -5,7 +5,7 @@ onready var s2 = get_node("../../SidePanel/S2")
 onready var pot = get_node("../../SidePanel/P")
 onready var nepot = get_node("../../SidePanel/N")
 onready var gap = get_node("../../SidePanel/G")
-onready var grid = get_node("GridContainer")
+onready var list = get_node("ItemList")
 onready var show = get_node("Show")
 var block = load("res://Nr_Block.tscn")
 var matrix = []
@@ -71,7 +71,7 @@ func Adrian_Beteringhe():
 func show_matrix():
 	if performance:
 		show.visible = true
-		grid.visible = false
+		list.visible = false
 		var all = ''
 		for x in height+3:
 			all = all + "\n"
@@ -80,14 +80,10 @@ func show_matrix():
 		show.text=all
 	else:
 		show.visible = false
-		grid.visible = true
+		list.visible = true
 		for x in height+3:
 			for y in width+2:
-		#						Making the borders
-				var b = block.instance()
-				grid.columns = width+2
-				grid.add_child(b)
-				b.set_text(str(matrix[x][y]))
+				list.add_item(str(matrix[x][y]),null,true)
 	$Seq1.text = seq1
 	$Seq2.text = seq2
 
@@ -147,13 +143,12 @@ func _on_Calc_pressed():
 		height = s2_txt.length()
 		seq_max = [height, width].max()
 	#						Erases any previous values
-	for c in grid.get_children():
-		grid.remove_child(c)
-		c.queue_free()
+	list.clear()
 	matrix = []
 	seq1 = ""
 	seq2 = ""
 	#						Starts processes
+	list.max_columns = width+2
 	Adrian_Beteringhe()
 	seq1 = str(matrix[height+1][0])
 	seq2 = str(matrix[0][width+1])
