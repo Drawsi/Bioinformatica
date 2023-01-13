@@ -63,10 +63,12 @@ func Adrian_Beteringhe():
 				if x<height+2:
 					maxi=[matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1],-int(matrix[x+1][y-1])].max()
 	
+	#						Creates the last row
 	matrix[height+2][0] = " "
 	for y in width+2:
 		if y>0:
 			matrix[height+2][y] = matrix[1][width+2-y]
+			print(matrix[height+2][y])
 
 func show_matrix():
 	if performance:
@@ -115,46 +117,66 @@ func png_test(x,y):
 		return g
 
 func backtrack(x,y):
-	if seq_max>0:
-		var highest = [matrix[x-1][y], matrix[x][y-1], matrix[x-1][y-1]].max()
-		if highest == matrix[x-1][y-1]:
-			seq1 = str(matrix[0][y-1]) + seq1
-			seq2 = str(matrix[x-1][0]) + seq2
-			backtrack(x-1,y-1)
-		elif highest == matrix[x-1][y]:
-			seq1 = " " + seq1
-			seq2 = str(matrix[x-1][0]) + seq2
-			backtrack(x-1,y)
-		elif highest == matrix[x][y-1]:
-			seq1 = str(matrix[0][y-1]) + seq1
-			seq2 = " " + seq2
-			backtrack(x,y-1)
+	while seq_max>0:
+		#		Defining the closest neighbours
+		var a = int(matrix[x-1][y])
+		var b = int(matrix[x][y-1])
+		var c = int(matrix[x-1][y-1])
+		var highest = [a,b,c].max()
+		#		Checking differences between highs
+		if a!=b || a!=c || b!=c:
+			match highest:
+				a:
+					seq1 = " " + seq1
+					seq2 = str(matrix[x-1][0]) + seq2
+					x = x-1
+				b:
+					seq1 = str(matrix[0][y-1]) + seq1
+					seq2 = " " + seq2
+					y = y-1
+				c:
+					seq1 = str(matrix[0][y-1]) + seq1
+					seq2 = str(matrix[x-1][0]) + seq2
+					x = x-1
+					y = y-1
+		else:
+			if a==b:
+				backtrack(x-1,y)#a
+				backtrack(x,y-1)#b
+			#	seq_max -= 1
+			elif a==c:
+				backtrack(x-1,y)#a
+				backtrack(x-1,y-1)#c
+			else:#a==c
+				backtrack(x-1,y)#a
+				backtrack(x-1,y-1)#c
 		seq_max -= 1
 
 func _on_Calc_pressed():
-	#						Initialising the basic vars
-	p = int(pot.get_text())
-	n = int(nepot.get_text())
-	g = int(gap.get_text())
-	s1_txt = s1.get_text()
-	s2_txt = s2.get_text()
-	if s1_txt and s2_txt:
-		width = s1_txt.length()
-		height = s2_txt.length()
-		seq_max = [height, width].max()
-	#						Erases any previous values
-	list.clear()
-	matrix = []
-	seq1 = ""
-	seq2 = ""
-	#						Starts processes
-	list.max_columns = width+2
-	Adrian_Beteringhe()
-	seq1 = str(matrix[height+1][0])
-	seq2 = str(matrix[0][width+1])
-	backtrack(height+1,width+1)
-	dl_dh()
-	show_matrix()
+	if get_parent().get_current_tab() == 2:
+		#						Initialising the basic vars
+		p = int(pot.get_text())
+		n = int(nepot.get_text())
+		g = int(gap.get_text())
+		s1_txt = s1.get_text()
+		s2_txt = s2.get_text()
+		if s1_txt and s2_txt:
+			width = s1_txt.length()
+			height = s2_txt.length()
+			seq_max = [height, width].max()
+		#						Erases any previous values
+		list.clear()
+		matrix = []
+		seq1 = ""
+		seq2 = ""
+		#						Starts processes
+		list.max_columns = width+2
+		Adrian_Beteringhe()
+		seq1 = str(matrix[height+1][0])
+		seq2 = str(matrix[0][width+1])
+		backtrack(height+1,width+1)
+		dl_dh()
+		show_matrix()
 
 func _on_CheckButton_pressed():
 	performance = !performance

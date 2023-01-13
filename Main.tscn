@@ -12,7 +12,7 @@
 [node name="BG" type="ColorRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-color = Color( 0.180392, 0.172549, 0.247059, 1 )
+color = Color( 0.964706, 0.960784, 0.913725, 1 )
 
 [node name="SidePanel" type="Control" parent="."]
 margin_right = 256.0
@@ -24,7 +24,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="SidePanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.286275, 0.333333, 0.45098, 1 )
+color = Color( 0.14902, 0.227451, 0.290196, 1 )
 
 [node name="S1" type="LineEdit" parent="SidePanel"]
 margin_left = 16.0
@@ -105,6 +105,7 @@ rect_scale = Vector2( 2, 2 )
 text = "Calculeaza"
 
 [node name="TabContainer" type="TabContainer" parent="."]
+self_modulate = Color( 0.666667, 0.670588, 0.678431, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 256.0
@@ -126,7 +127,7 @@ script = ExtResource( 3 )
 margin_left = 60.0
 margin_top = 24.0
 margin_right = 380.0
-margin_bottom = 280.0
+margin_bottom = 344.0
 auto_height = true
 same_column_width = true
 

@@ -107,61 +107,66 @@ func png_test(x,y):
 		return g
 
 func backtrack(x,y):
-	if seq_max>0:
+	while seq_max>0:
+		#		Defining the closest neighbours
 		var a = int(matrix[x-1][y])
 		var b = int(matrix[x][y-1])
 		var c = int(matrix[x-1][y-1])
 		var highest = [a,b,c].max()
+		#		Checking differences between highs
 		if a!=b || a!=c || b!=c:
 			match highest:
 				a:
 					seq1 = " " + seq1
 					seq2 = str(matrix[x-1][0]) + seq2
-					backtrack(x-1,y)
+					x = x-1
 				b:
 					seq1 = str(matrix[0][y-1]) + seq1
 					seq2 = " " + seq2
-					backtrack(x,y-1)
+					y = y-1
 				c:
 					seq1 = str(matrix[0][y-1]) + seq1
 					seq2 = str(matrix[x-1][0]) + seq2
-					backtrack(x-1,y-1)
+					x = x-1
+					y = y-1
 		else:
 			if a==b:
-			#	backtrack(x-1,y)#a
-			#	backtrack(x,y-1)#b
+				backtrack(x-1,y)#a
+				backtrack(x,y-1)#b
 			#	seq_max -= 1
-				pass
 			elif a==c:
-				pass
+				backtrack(x-1,y)#a
+				backtrack(x-1,y-1)#c
 			else:#a==c
-				pass
+				backtrack(x-1,y)#a
+				backtrack(x-1,y-1)#c
 		seq_max -= 1
 
 func _on_Calc_pressed():
-	#						Initialising the basic vars
-	p = int(pot.get_text())
-	n = int(nepot.get_text())
-	g = int(gap.get_text())
-	s1_txt = s1.get_text()
-	s2_txt = s2.get_text()
-	if s1_txt and s2_txt:
-		width = s1_txt.length()
-		height = s2_txt.length()
-		seq_max = [height, width].max()
-	#						Erases any previous values
-	list.clear()
-	matrix = []
-	seq1 = ""
-	seq2 = ""
-	#						Starts processes
-	list.max_columns = width+2
-	Needleman_Wunsch()
-	seq1 = str(matrix[height+1][0])
-	seq2 = str(matrix[0][width+1])
-	backtrack(height+1,width+1)
-	dl_dh()
-	show_matrix()
+	if get_parent().get_current_tab() == 0:
+		#						Initialising the basic vars
+		p = int(pot.get_text())
+		n = int(nepot.get_text())
+		g = int(gap.get_text())
+		s1_txt = s1.get_text()
+		s2_txt = s2.get_text()
+		if s1_txt and s2_txt:
+			width = s1_txt.length()
+			height = s2_txt.length()
+			seq_max = [height, width].max()
+		#						Erases any previous values
+		list.clear()
+		matrix = []
+		seq1 = ""
+		seq2 = ""
+		#						Starts processes
+		list.max_columns = width+2
+		Needleman_Wunsch()
+		seq1 = str(matrix[height+1][0])
+		seq2 = str(matrix[0][width+1])
+		backtrack(height+1,width+1)
+		dl_dh()
+		show_matrix()
 
 func _on_CheckButton_pressed():
 	performance = !performance
