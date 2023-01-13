@@ -75,9 +75,9 @@ func Smith_Waterman():
 	seq1 = str(matrix[i][0])
 	seq2 = str(matrix[0][j])
 				#		Checks wheather or not there are multiple values
-	for x in height+2:
-		for y in width+2:
-			if x>1 and y>1 and matrix[x][y]==matrix[i][j]:
+	for x in range(1, height+2):
+		for y in range(1, width+2):
+			if matrix[x][y]==matrix[i][j]:
 				backtrack(i,j)
 
 func show_matrix():
@@ -151,13 +151,15 @@ func backtrack(x,y):
 					y = y-1
 		else:
 			if a==b:
+				seq_max -= 1
 				backtrack(x-1,y)#a
 				backtrack(x,y-1)#b
-			#	seq_max -= 1
 			elif a==c:
+				seq_max -= 1
 				backtrack(x-1,y)#a
 				backtrack(x-1,y-1)#c
 			else:#a==c
+				seq_max -= 1
 				backtrack(x-1,y)#a
 				backtrack(x-1,y-1)#c
 		seq_max -= 1

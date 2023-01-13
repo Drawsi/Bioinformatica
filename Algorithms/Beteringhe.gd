@@ -68,7 +68,6 @@ func Adrian_Beteringhe():
 	for y in width+2:
 		if y>0:
 			matrix[height+2][y] = matrix[1][width+2-y]
-			print(matrix[height+2][y])
 
 func show_matrix():
 	if performance:
