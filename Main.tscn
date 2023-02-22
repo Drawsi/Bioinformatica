@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Algorithms/Smith.gd" type="Script" id=1]
+[ext_resource path="res://Smith.gd" type="Script" id=1]
 [ext_resource path="res://IBM.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Algorithms/Needleman.gd" type="Script" id=3]
-[ext_resource path="res://Algorithms/Beteringhe.gd" type="Script" id=4]
+[ext_resource path="res://Needleman.gd" type="Script" id=3]
+[ext_resource path="res://Beteringhe.gd" type="Script" id=4]
 [ext_resource path="res://Star.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
