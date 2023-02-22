@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Smith.gd" type="Script" id=1]
+[ext_resource path="res://Algorithms/Smith.gd" type="Script" id=1]
 [ext_resource path="res://IBM.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Needleman.gd" type="Script" id=3]
-[ext_resource path="res://Beteringhe.gd" type="Script" id=4]
+[ext_resource path="res://Algorithms/Needleman.gd" type="Script" id=3]
+[ext_resource path="res://Algorithms/Beteringhe.gd" type="Script" id=4]
+[ext_resource path="res://Star.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -12,41 +13,38 @@
 [node name="BG" type="ColorRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-color = Color( 0.180392, 0.172549, 0.247059, 1 )
+color = Color( 0.964706, 0.960784, 0.913725, 1 )
 
 [node name="SidePanel" type="Control" parent="."]
 margin_right = 256.0
 margin_bottom = 600.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="SidePanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.286275, 0.333333, 0.45098, 1 )
+color = Color( 0.14902, 0.227451, 0.290196, 1 )
 
 [node name="S1" type="LineEdit" parent="SidePanel"]
-margin_left = 16.0
-margin_top = 64.0
-margin_right = 192.0
-margin_bottom = 88.0
+margin_left = 40.0
+margin_top = 16.0
+margin_right = 240.0
+margin_bottom = 40.0
 text = "CGTA"
 placeholder_text = "Prima secventa"
 
 [node name="S2" type="LineEdit" parent="SidePanel"]
-margin_left = 16.0
-margin_top = 128.0
-margin_right = 192.0
-margin_bottom = 152.0
+margin_left = 40.0
+margin_top = 48.0
+margin_right = 240.0
+margin_bottom = 72.0
 text = "CTA"
 placeholder_text = "A doua secventa"
 
 [node name="P" type="LineEdit" parent="SidePanel"]
-margin_left = 136.0
-margin_top = 192.0
-margin_right = 194.0
-margin_bottom = 216.0
+margin_left = 184.0
+margin_top = 80.0
+margin_right = 242.0
+margin_bottom = 104.0
 text = "2"
 align = 1
 
@@ -58,10 +56,10 @@ margin_bottom = 22.0
 text = "Potrivire"
 
 [node name="N" type="LineEdit" parent="SidePanel"]
-margin_left = 136.0
-margin_top = 232.0
-margin_right = 194.0
-margin_bottom = 256.0
+margin_left = 184.0
+margin_top = 120.0
+margin_right = 242.0
+margin_bottom = 144.0
 text = "-2"
 align = 1
 
@@ -73,10 +71,10 @@ margin_bottom = 22.0
 text = "Nepotrivire"
 
 [node name="G" type="LineEdit" parent="SidePanel"]
-margin_left = 136.0
-margin_top = 272.0
-margin_right = 194.0
-margin_bottom = 296.0
+margin_left = 184.0
+margin_top = 160.0
+margin_right = 242.0
+margin_bottom = 184.0
 text = "-3"
 align = 1
 
@@ -88,23 +86,25 @@ margin_bottom = 22.0
 text = "Gap"
 
 [node name="CheckButton" type="CheckButton" parent="SidePanel"]
-margin_left = 24.0
-margin_top = 408.0
-margin_right = 207.0
-margin_bottom = 448.0
+margin_left = 40.0
+margin_top = 8.0
+margin_right = 223.0
+margin_bottom = 48.0
+rect_rotation = 89.9999
 custom_styles/focus = SubResource( 1 )
 text = "Mod performant"
 align = 1
 
 [node name="Calc" type="Button" parent="SidePanel"]
 margin_left = 40.0
-margin_top = 472.0
+margin_top = 192.0
 margin_right = 119.0
-margin_bottom = 492.0
+margin_bottom = 212.0
 rect_scale = Vector2( 2, 2 )
 text = "Calculeaza"
 
 [node name="TabContainer" type="TabContainer" parent="."]
+self_modulate = Color( 0.666667, 0.670588, 0.678431, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 256.0
@@ -126,7 +126,7 @@ script = ExtResource( 3 )
 margin_left = 60.0
 margin_top = 24.0
 margin_right = 380.0
-margin_bottom = 280.0
+margin_bottom = 344.0
 auto_height = true
 same_column_width = true
 
@@ -177,7 +177,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 40.0
+margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 script = ExtResource( 1 )
@@ -315,6 +315,70 @@ margin_right = 484.0
 margin_bottom = 222.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 2 )
+
+[node name="Star" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 5 )
+
+[node name="Line2D" type="Line2D" parent="TabContainer/Star"]
+points = PoolVector2Array( 124, 152, 508, 152, 132, 400, 316, 32, 508, 400, 132, 160 )
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Star"]
+margin_left = 300.0
+margin_top = 200.0
+margin_right = 340.0
+margin_bottom = 222.0
+custom_fonts/font = ExtResource( 2 )
+text = "1"
+
+[node name="Label2" type="Label" parent="TabContainer/Star"]
+margin_left = 116.0
+margin_top = 144.0
+margin_right = 156.0
+margin_bottom = 166.0
+custom_fonts/font = ExtResource( 2 )
+text = "2"
+
+[node name="Label3" type="Label" parent="TabContainer/Star"]
+margin_left = 500.0
+margin_top = 144.0
+margin_right = 540.0
+margin_bottom = 166.0
+custom_fonts/font = ExtResource( 2 )
+text = "3"
+
+[node name="Label4" type="Label" parent="TabContainer/Star"]
+margin_left = 124.0
+margin_top = 384.0
+margin_right = 164.0
+margin_bottom = 406.0
+custom_fonts/font = ExtResource( 2 )
+text = "4"
+
+[node name="Label5" type="Label" parent="TabContainer/Star"]
+margin_left = 300.0
+margin_top = 24.0
+margin_right = 340.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 2 )
+text = "5"
+
+[node name="Label6" type="Label" parent="TabContainer/Star"]
+margin_left = 492.0
+margin_top = 384.0
+margin_right = 532.0
+margin_bottom = 406.0
+custom_fonts/font = ExtResource( 2 )
+text = "6"
 
 [connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Needleman" method="_on_CheckButton_pressed"]
 [connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Smith" method="_on_CheckButton_pressed"]
