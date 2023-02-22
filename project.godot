@@ -14,10 +14,6 @@ config/name="BIOINF-Proiect"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-Main="*res://Main.gd"
-
 [display]
 
 window/stretch/mode="viewport"

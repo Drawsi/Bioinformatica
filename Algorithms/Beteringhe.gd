@@ -17,7 +17,7 @@ var s1_txt
 var s2_txt
 var height = 0
 var width = 0
-var p 
+var p
 var n
 var g
 
