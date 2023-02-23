@@ -326,13 +326,17 @@ margin_right = -4.0
 margin_bottom = -4.0
 script = ExtResource( 5 )
 
-[node name="Line2D" type="Line2D" parent="TabContainer/Star"]
+[node name="Control" type="Control" parent="TabContainer/Star"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Line2D" type="Line2D" parent="TabContainer/Star/Control"]
 points = PoolVector2Array( 124, 152, 508, 152, 132, 400, 316, 32, 508, 400, 132, 160 )
 joint_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/Star"]
+[node name="Label" type="Label" parent="TabContainer/Star/Control"]
 margin_left = 300.0
 margin_top = 200.0
 margin_right = 340.0
@@ -340,7 +344,7 @@ margin_bottom = 222.0
 custom_fonts/font = ExtResource( 2 )
 text = "1"
 
-[node name="Label2" type="Label" parent="TabContainer/Star"]
+[node name="Label2" type="Label" parent="TabContainer/Star/Control"]
 margin_left = 116.0
 margin_top = 144.0
 margin_right = 156.0
@@ -348,7 +352,7 @@ margin_bottom = 166.0
 custom_fonts/font = ExtResource( 2 )
 text = "2"
 
-[node name="Label3" type="Label" parent="TabContainer/Star"]
+[node name="Label3" type="Label" parent="TabContainer/Star/Control"]
 margin_left = 500.0
 margin_top = 144.0
 margin_right = 540.0
@@ -356,7 +360,7 @@ margin_bottom = 166.0
 custom_fonts/font = ExtResource( 2 )
 text = "3"
 
-[node name="Label4" type="Label" parent="TabContainer/Star"]
+[node name="Label4" type="Label" parent="TabContainer/Star/Control"]
 margin_left = 124.0
 margin_top = 384.0
 margin_right = 164.0
@@ -364,7 +368,7 @@ margin_bottom = 406.0
 custom_fonts/font = ExtResource( 2 )
 text = "4"
 
-[node name="Label5" type="Label" parent="TabContainer/Star"]
+[node name="Label5" type="Label" parent="TabContainer/Star/Control"]
 margin_left = 300.0
 margin_top = 24.0
 margin_right = 340.0
@@ -372,7 +376,7 @@ margin_bottom = 46.0
 custom_fonts/font = ExtResource( 2 )
 text = "5"
 
-[node name="Label6" type="Label" parent="TabContainer/Star"]
+[node name="Label6" type="Label" parent="TabContainer/Star/Control"]
 margin_left = 492.0
 margin_top = 384.0
 margin_right = 532.0
@@ -380,9 +384,14 @@ margin_bottom = 406.0
 custom_fonts/font = ExtResource( 2 )
 text = "6"
 
+[node name="Show" type="Label" parent="TabContainer/Star"]
+margin_right = 188.0
+margin_bottom = 144.0
+
 [connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Needleman" method="_on_CheckButton_pressed"]
 [connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Smith" method="_on_CheckButton_pressed"]
 [connection signal="pressed" from="SidePanel/CheckButton" to="TabContainer/Beteringhe" method="_on_CheckButton_pressed"]
 [connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Needleman" method="_on_Calc_pressed"]
 [connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Smith" method="_on_Calc_pressed"]
 [connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Beteringhe" method="_on_Calc_pressed"]
+[connection signal="pressed" from="SidePanel/Calc" to="TabContainer/Star" method="_on_Calc_pressed"]
