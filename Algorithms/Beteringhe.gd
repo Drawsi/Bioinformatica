@@ -1,10 +1,10 @@
 extends Tabs
 
-onready var s1 = get_node("../../SidePanel/S1")
-onready var s2 = get_node("../../SidePanel/S2")
-onready var pot = get_node("../../SidePanel/P")
-onready var nepot = get_node("../../SidePanel/N")
-onready var gap = get_node("../../SidePanel/G")
+onready var s1 = get_node("../../SidePanel/S1").get_text()
+onready var s2 = get_node("../../SidePanel/S2").get_text()
+onready var p = int(get_node("../../SidePanel/P").get_text())
+onready var n = int(get_node("../../SidePanel/N").get_text())
+onready var g = int(get_node("../../SidePanel/G").get_text())
 onready var list = get_node("ItemList")
 onready var show = get_node("Show")
 var block = load("res://Nr_Block.tscn")
@@ -13,13 +13,14 @@ var seq1 = ""
 var seq2 = ""
 var seq_max
 
-var s1_txt
-var s2_txt
 var height = 0
 var width = 0
+<<<<<<< Updated upstream:Algorithms/Beteringhe.gd
 var p
 var n
 var g
+=======
+>>>>>>> Stashed changes:Beteringhe.gd
 
 var performance = false
 
@@ -40,11 +41,11 @@ func Adrian_Beteringhe():
 	for x in height+2:
 		if x>1:
 			matrix[x][1] = matrix[x-1][1] + g
-			matrix[x][0] = s2_txt[x-2]
+			matrix[x][0] = s2[x-2]
 	for y in width+2:
 		if y>1:
 			matrix[1][y] = matrix[1][y-1] + g
-			matrix[0][y] = s1_txt[y-2]
+			matrix[0][y] = s1[y-2]
 			
 	#						Calculating the matrix
 	var maxi
@@ -96,7 +97,7 @@ func dl_dh():
 	var dl = 0
 	var nn = 0
 	for x in line_min:
-		if s1_txt[x-1]==s2_txt[x-1]:
+		if s1[x-1]==s2[x-1]:
 			dh += 1
 		else:
 			nn += 1
@@ -108,7 +109,7 @@ func png_test(x,y):
 	x=x-2
 	y=y-2
 	
-	if s1_txt[y]==s2_txt[x]:
+	if s1[y]==s2[x]:
 		return p
 	elif x==y:
 		return n
@@ -152,6 +153,7 @@ func backtrack(x,y):
 		seq_max -= 1
 
 func _on_Calc_pressed():
+<<<<<<< Updated upstream:Algorithms/Beteringhe.gd
 	if get_parent().get_current_tab() == 2:
 		#						Initialising the basic vars
 		p = int(pot.get_text())
@@ -176,6 +178,26 @@ func _on_Calc_pressed():
 		backtrack(height+1,width+1)
 		dl_dh()
 		show_matrix()
+=======
+	#						Initialising the basic vars
+	if s1 and s2:
+		width = s1.length()
+		height = s2.length()
+		seq_max = [height, width].max()
+	#						Erases any previous values
+	list.clear()
+	matrix = []
+	seq1 = ""
+	seq2 = ""
+	#						Starts processes
+	list.max_columns = width+2
+	Adrian_Beteringhe()
+	seq1 = str(matrix[height+1][0])
+	seq2 = str(matrix[0][width+1])
+	backtrack(height+1,width+1)
+	dl_dh()
+	show_matrix()
+>>>>>>> Stashed changes:Beteringhe.gd
 
 func _on_CheckButton_pressed():
 	performance = !performance
