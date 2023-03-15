@@ -1,10 +1,11 @@
-extends Tabs
-onready var s1 = get_node("../../SidePanel/S1").get_text()
-onready var s2 = get_node("../../SidePanel/S2").get_text()
-onready var p = int(get_node("../../SidePanel/P").get_text())
-onready var n = int(get_node("../../SidePanel/N").get_text())
-onready var g = int(get_node("../../SidePanel/G").get_text())
-onready var show = get_node("Show")
+extends TabBar
+@onready var s1 = get_node("../../SidePanel/S1").get_text()
+@onready var s2 = get_node("../../SidePanel/S2").get_text()
+@onready var p = int(get_node("../../SidePanel/P").get_text())
+@onready var n = int(get_node("../../SidePanel/N").get_text())
+@onready var g = int(get_node("../../SidePanel/G").get_text())
+@onready var show = get_node("Show")
+@onready var list = get_node("ItemList")
 var block = load("res://Nr_Block.tscn")
 var matrix = []
 var seq1 = ""
@@ -69,13 +70,30 @@ func first_table():
 #S4	-6	-2	-2	0	-6	-16
 #S5	2	2	-6	-6	0	-8
 
-func _show():
+func _show_fin():
 	var all = 'T'
 	for x in s.size():
 		all = all + "\n"
 		all = all + str((matrix[x][s.size()]))
 	show.text = all
 
+func _show_all():
+	list.max_columns = s.size()
+	for i in s.size():
+		for j in s.size():
+			list.add_item(str(matrix[i][j]),null,true)
+
 func _on_Calc_pressed():
 	first_table()
-	_show()
+	_show_fin()
+	_factorial(5,3)
+
+func _factorial(nr,sample):	#We need to calculate the minimum nr of combinations per table
+	var comb = _fac(nr)/(_fac(sample)*_fac(nr-sample))
+	return(comb)
+	
+func _fac(r):
+	var aux=1
+	for i in range(1,r+1):
+		aux=aux*i
+	return aux

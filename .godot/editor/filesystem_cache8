@@ -1,0 +1,13 @@
+2a60927148abd1d33b818b535e306557
+::res://::1678815384
+Beteringhe.gd::GDScript::-1::1677703969::0::1::::<>TabBar<>::
+default_env.tres::Environment::9203260257625712691::1678815316::0::1::::<><>::
+IBM.tres::FontFile::-1::1677702861::0::1::::<><>::res://IBMPlexMono-Regular.ttf
+IBMPlexMono-Regular.ttf::FontFile::7370502483585284841::1667318364::1677702888::1::::<><>::
+icon.png::CompressedTexture2D::5764457566761845153::1665764734::1677702888::1::::<><>::
+Main.gd::GDScript::-1::1677702861::0::1::::<>Node2D<>::
+Main.tscn::PackedScene::1059979377958217336::1678815317::0::1::::<><>::res://Smith.gd<>res://Needleman.gd<>res://Beteringhe.gd<>res://Star.gd
+Needleman.gd::GDScript::-1::1678815233::0::1::::<>TabBar<>::
+Nr_Block.tscn::PackedScene::-1::1677702861::0::1::::<><>::res://IBM.tres
+Smith.gd::GDScript::-1::1677703969::0::1::::<>TabBar<>::
+Star.gd::GDScript::-1::1678702125::0::1::::<>TabBar<>::

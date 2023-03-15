@@ -1,12 +1,12 @@
-extends Tabs
+extends TabBar
 
-onready var s1 = get_node("../../SidePanel/S1").get_text()
-onready var s2 = get_node("../../SidePanel/S2").get_text()
-onready var p = int(get_node("../../SidePanel/P").get_text())
-onready var n = int(get_node("../../SidePanel/N").get_text())
-onready var g = int(get_node("../../SidePanel/G").get_text())
-onready var list = get_node("ItemList")
-onready var show = get_node("Show")
+@onready var s1 = get_node("../../SidePanel/S1").get_text()
+@onready var s2 = get_node("../../SidePanel/S2").get_text()
+@onready var p = int(get_node("../../SidePanel/P").get_text())
+@onready var n = int(get_node("../../SidePanel/N").get_text())
+@onready var g = int(get_node("../../SidePanel/G").get_text())
+@onready var list = get_node("ItemList")
+@onready var show = get_node("Show")
 var block = load("res://Nr_Block.tscn")
 var matrix = []
 var seq1 = ""
@@ -44,7 +44,7 @@ func Smith_Waterman():
 	#						Calculating the matrix
 	var i = 1
 	var j = 1
-	var maxi
+	var _max
 	for x in height+2:
 		for y in width+2:
 			if x>1 and y>1:
@@ -54,8 +54,8 @@ func Smith_Waterman():
 					matrix[x][y]=matrix[x-1][y-1] + png_test(x,y)
 	#						The rest
 				else:
-					maxi=[matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1]].max()
-					matrix[x][y]=maxi + png_test(x,y)
+					_max=[matrix[x-1][y],matrix[x][y-1],matrix[x-1][y-1]].max()
+					matrix[x][y]=_max + png_test(x,y)
 					
 				if matrix[x][y]<0:
 					matrix[x][y]=0
@@ -94,13 +94,13 @@ func dl_dh():
 	var line_max = [height,width].max()
 	var dh = 0
 	var dl = 0
-	var nn = 0
+	var np = 0
 	for x in line_min:
-		if s1[x-1]==s2[x-1]:
+		if s1[x-1]!=s2[x-1]:
 			dh += 1
 		else:
-			nn += 1
-	dl = dh*p + nn*n + (line_max-line_min)*g
+			np += 1
+	dl = np*p + dh*n + (line_max-line_min)*g
 	$DL.set_text("DL="+str(dl))
 	$DH.set_text("DH="+str(dh))
 
@@ -132,7 +132,15 @@ func backtrack(x,y):
 			backtrack(x,y-1)
 		seq_max -= 1
 
+func get_values():
+	s1 = get_node("../../SidePanel/S1").get_text()
+	s2 = get_node("../../SidePanel/S2").get_text()
+	p = int(get_node("../../SidePanel/P").get_text())
+	n = int(get_node("../../SidePanel/N").get_text())
+	g = int(get_node("../../SidePanel/G").get_text())
+
 func _on_Calc_pressed():
+	get_values()
 	#						Initialising the basic vars
 	if s1 and s2:
 		width = s1.length()
