@@ -57,10 +57,6 @@ func first_table():
 		for j in s.size():
 			t = t + matrix[i][j]
 		matrix[i][s.size()] = t
-	
-	#			Printing it
-	#for x in s.size():
-	#	print(matrix[x])
 
 #		Example
 #	S1	S2	S3	S4	S5	T
@@ -91,7 +87,6 @@ func _on_Calc_pressed():
 func _factorial(nr,sample):	#We need to calculate the minimum nr of combinations per table
 	var comb = _fac(nr)/(_fac(sample)*_fac(nr-sample))
 	return(comb)
-	
 func _fac(r):
 	var aux=1
 	for i in range(1,r+1):
