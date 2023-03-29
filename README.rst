@@ -12,3 +12,4 @@ Bioinformatics project
 **Additional information:**
   - The documentation will probably be the last thing I'll work on unless the demand is high enough that it takes priority.
   - I plan on using this as my university thesis therefore further development will be necesarry.
+![Screenshot of software](https://i.imgur.com/lQWLJl7.gif)
