@@ -76,6 +76,8 @@ func show_matrix():
 
 func dl_dh():
 	#						Shows the 'score' of the matrix
+	# DH is the difference between the two
+	# DL is the addition of match, mismatch and gap
 	var line_min = [height,width].min()
 	var line_max = [height,width].max()
 	var dh = 0

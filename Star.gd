@@ -19,6 +19,13 @@ var s=[ "CGT",
 		"CCG",
 		"TCA",
 		"AGT"]
+var test_s=[ "S1",
+		"S2",
+		"S3",
+		"S4",
+		"S5"]
+
+var memory = []
 
 var height = 0
 var width = 0
@@ -82,11 +89,24 @@ func _show_all():
 func _on_Calc_pressed():
 	first_table()
 	_show_fin()
-	_factorial(5,3)
-
-func _factorial(nr,sample):	#We need to calculate the minimum nr of combinations per table
+	#In the second table there's S1,S2,S3 -> k=3
+	#Where as S1,S2,S3,S4,S5 -> n=5
+	#So the factorial would be _factorial(5,3) = 10
+	#Tested and it works
+	_factorial(5,5)
+	for i in test_s.size():
+		for j in test_s.size():
+			memory.append(i)
+			if test_s[i]!=test_s[j]:
+				memory[i][j] = test_s[j]
+				print(test_s[i],' ',test_s[j])
+	print(memory)
+func _factorial(nr,sample):	
+	"""We need to calculate the minimum nr of combinations per table
+	as to not recalculate values, thus cutting down on time and power needed"""
 	var comb = _fac(nr)/(_fac(sample)*_fac(nr-sample))
 	return(comb)
+
 func _fac(r):
 	var aux=1
 	for i in range(1,r+1):
