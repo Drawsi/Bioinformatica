@@ -25,7 +25,9 @@ var test_s=[ "S1",
 		"S4",
 		"S5"]
 
-var memory = []
+var memory = {
+	"S1" = ''
+}
 
 var height = 0
 var width = 0
@@ -94,12 +96,12 @@ func _on_Calc_pressed():
 	#So the factorial would be _factorial(5,3) = 10
 	#Tested and it works
 	_factorial(5,5)
-	for i in test_s.size():
-		for j in test_s.size():
-			memory.append(i)
-			if test_s[i]!=test_s[j]:
-				memory[i][j] = test_s[j]
-				print(test_s[i],' ',test_s[j])
+	#for i in test_s.size():
+	#	for j in test_s.size():
+	#		memory.append(i)
+	#		if test_s[i]!=test_s[j]:
+	#			memory[i][j] = test_s[j]
+	#			print(test_s[i],' ',test_s[j])
 	print(memory)
 func _factorial(nr,sample):	
 	"""We need to calculate the minimum nr of combinations per table
